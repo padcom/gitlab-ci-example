@@ -15,6 +15,11 @@ install:
   script:
     - npm install
 
+test:
+  stage: build
+  script:
+    - npm test
+
 build:
   stage: build
   script:
@@ -26,11 +31,6 @@ build:
   only:
     - master
     - merge_requests
-
-test:
-  stage: build
-  script:
-    - npm test
 
 publish:
   stage: publish

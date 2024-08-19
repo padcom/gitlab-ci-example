@@ -1,0 +1,25 @@
+{
+  "name": "gitlab-local",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "Matthias Hryniszak <padcom@gmail.com>",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "@padcom/eslint-config-vue": "^0.8.1",
+    "@padcom/vite-config-vue": "^0.1.0",
+    "@vitejs/plugin-vue": "^5.1.2",
+    "eslint": "^8.42.0",
+    "eslint-plugin-vue": "^9.27.0",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.1"
+  },
+  "eslintConfig": {
+    "extends": "@padcom/eslint-config-vue"
+  }
+}

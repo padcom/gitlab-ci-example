@@ -1,0 +1,25 @@
+image: node:alpine
+
+stages:
+  - prepare
+  - build
+
+cache:
+  key: $CI_COMMIT_REF_NAME
+  paths:
+    - node_modules
+
+install:
+  stage: prepare
+  script: \
+    npm install
+
+build:
+  stage: build
+  script: \
+    npm run build
+  artifacts:
+    expire_in: 1h
+  only:
+    - master
+    - merge_requests

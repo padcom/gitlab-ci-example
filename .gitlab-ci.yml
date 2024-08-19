@@ -35,6 +35,7 @@ build:
 publish:
   stage: publish
   script:
+    - echo "VALUE: $JOB_VARIABLE"
     - apt update
     - apt install -y zip
     - cd dist

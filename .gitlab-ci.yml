@@ -34,7 +34,7 @@ publish:
     - apt install -y zip
     - cd dist
     - zip website.zip -r .
-    - wget https://dl.min.io/client/mc/release/linux-amd64/mc -v -O /bin/mc > /dev/null 2> /dev/null
+    - wget https://dl.min.io/client/mc/release/linux-amd64/mc -v -O /bin/mc
     - chmod +x /bin/mc
   artifacts:
     paths:

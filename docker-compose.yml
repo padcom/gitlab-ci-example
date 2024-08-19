@@ -1,5 +1,3 @@
-version: '3.6'
-
 services:
   gitlab:
     image: gitlab/gitlab-ce
@@ -24,7 +22,7 @@ services:
     # The official v3 Traefik docker image
     image: traefik:v3.1
     # Enables the web UI and tells Traefik to listen to docker
-    command: --api.insecure=true --providers.docker
+    command: --api.insecure=true --providers.docker "--providers.docker.defaultRule=Host(`{{ normalize .Name }}.docker.localhost`)"
     ports:
       # The HTTP port
       - "8081:80"
@@ -37,5 +35,14 @@ services:
   whoami:
     # A container that exposes an API to show its IP address
     image: traefik/whoami
-    labels:
-      - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
+    # labels:
+    #  - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
+
+  app:
+    build: .
+    ports:
+      - 3000
+    volumes:
+      - ./dist:/usr/share/caddy
+    # labels:
+    #   - "traefik.http.routers.app.rule=Host(`app.docker.localhost`)"

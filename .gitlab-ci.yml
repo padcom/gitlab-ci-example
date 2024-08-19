@@ -47,4 +47,6 @@ publish:
       - dist/website.zip
   when: manual
   variables:
-    JOB_VARIABLE: "hello, world!"
+    JOB_VARIABLE:
+      value: "hello, world!"
+      description: "This is an example variable for the publish job"

@@ -45,3 +45,5 @@ publish:
     paths:
       - dist/website.zip
   when: manual
+  variables:
+    JOB_VARIABLE: "hello, world!"

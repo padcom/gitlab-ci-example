@@ -1,7 +1,11 @@
+volumes:
+  gitlab-runner-config:
+
 services:
   gitlab:
     image: gitlab/gitlab-ce
     container_name: gitlab
+    profiles: [gitlab]
     restart: always
     hostname: 'gitlab.aplaline.com'
     environment:
@@ -18,7 +22,16 @@ services:
       - '$GITLAB_HOME/data:/var/opt/gitlab'
     shm_size: '256m'
 
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    profiles: [gitlab]
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - gitlab-runner-config:/etc/gitlab-runner
+
   reverse-proxy:
+    profiles: [reverse-proxy]
     # The official v3 Traefik docker image
     image: traefik:v3.1
     # Enables the web UI and tells Traefik to listen to docker
@@ -33,12 +46,14 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   whoami:
+    profiles: [app, whoami]
     # A container that exposes an API to show its IP address
     image: traefik/whoami
     # labels:
     #  - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
 
   app:
+    profiles: [app, testme]
     build: .
     ports:
       - 3000

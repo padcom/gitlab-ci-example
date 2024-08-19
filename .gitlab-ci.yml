@@ -3,6 +3,7 @@ image: node:22.3.0-bullseye
 stages:
   - prepare
   - build
+  - publish
 
 cache:
   key: $CI_COMMIT_REF_NAME
@@ -25,3 +26,16 @@ build:
   only:
     - master
     - merge_requests
+
+publish:
+  stage: publish
+  script:
+    - apt update
+    - apt install -y zip
+    - cd dist
+    - zip website.zip -r .
+    - wget https://storage.abaservices.ch/misc/mc -O /bin/mc > /dev/null 2> /dev/null
+    - chmod +x /bin/mc
+  artifacts:
+    paths:
+      - dist/website.zip

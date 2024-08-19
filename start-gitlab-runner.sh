@@ -7,4 +7,5 @@ docker compose exec -it gitlab-runner gitlab-runner register \
   --url http://gitlab.aplaline.com:8929/ \
   --executor docker \
   --docker-image ubuntu \
-  --description shared
+  --description shared \
+  --request-concurrency 16

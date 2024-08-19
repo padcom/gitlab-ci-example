@@ -39,3 +39,4 @@ publish:
   artifacts:
     paths:
       - dist/website.zip
+  when: manual

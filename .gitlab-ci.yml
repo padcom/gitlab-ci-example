@@ -27,6 +27,11 @@ build:
     - master
     - merge_requests
 
+test:
+  stage: build
+  script:
+    - npm test
+
 publish:
   stage: publish
   script:

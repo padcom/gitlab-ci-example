@@ -64,10 +64,7 @@ services:
 
   caddy:
     image: caddy
-    ports:
-      - 9002:80
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
     network_mode: host
-
 

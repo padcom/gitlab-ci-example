@@ -1,9 +1,22 @@
-http://forms.localtest.me {
-    # proxy requests to Minio server
-    reverse_proxy http://localhost:9000
+http://*.localtest.me {
+    # this is how we can extract the first part of the hostname from the Host header
+    @site header_regexp site Host ^(.*)\.localtest\.me$
 
-    # for top-level redirect to index.html
-    rewrite / /forms/index.html
-    # for the rest keep the URI but prefix it with 'forms/' because that's where it is deployed
-    rewrite /* /forms/{uri}
+
+    # Since only one matcher is allowed in `rewrite` (or anywhere else for that matter)
+    # we'll use the `handle` directive to further process the request
+    handle @site {
+        # matcher for top-level requests
+        @index path /
+        # for top-level redirect to index.html
+        rewrite @index /{re.site.1}/index.html
+
+        # matcher for sub-requests
+        @resource path /*
+        # for the rest keep the URI but prefix it with 'forms/' because that's where it is deployed
+        rewrite @resource /{re.site.1}/{uri}
+
+        # proxy requests to Minio server
+        reverse_proxy http://localhost:9000
+    }
 }

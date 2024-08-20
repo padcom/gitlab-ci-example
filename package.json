@@ -6,7 +6,8 @@
     "start": "vite",
     "build": "vite build",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "deploy": "./mc cp --recursive dist/* localhost/forms"
   },
   "keywords": [],
   "author": "Matthias Hryniszak <padcom@gmail.com>",

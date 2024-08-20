@@ -1,0 +1,9 @@
+http://forms.localtest.me {
+    # proxy requests to Minio server
+    reverse_proxy http://localhost:9000
+
+    # for top-level redirect to index.html
+    rewrite / /forms/index.html
+    # for the rest keep the URI but prefix it with 'forms/' because that's where it is deployed
+    rewrite /* /forms/{uri}
+}

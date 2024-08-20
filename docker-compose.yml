@@ -61,3 +61,13 @@ services:
       - ./dist:/usr/share/caddy
     # labels:
     #   - "traefik.http.routers.app.rule=Host(`app.docker.localhost`)"
+
+  caddy:
+    image: caddy
+    ports:
+      - 9002:80
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    network_mode: host
+
+

@@ -1,5 +1,5 @@
 #!/bin/sh
 
-./mc rb --force localhost/forms
-./mc mb localhost/forms
-./mc anonymous set download localhost/forms
+./mc rb --force localhost/portals
+./mc mb localhost/portals
+./mc anonymous set download localhost/portals
